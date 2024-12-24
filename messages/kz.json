@@ -1,0 +1,32 @@
+{
+  "HomePage": {
+    "logoAlt": "Негізгі логотип",
+    "mainImageAlt": "Негізгі сурет",
+    "findYourCalling": "Өзіңіздің жаныңызды табыңыз",
+    "interactiveHelperDescription": "Таланттарды анықтау және дұрыс мамандықты таңдау үшін интерактивті көмекші",
+    "cursorMagicAlt": "Сиқырлы курсор белгішесі",
+    "startTest": "Тесті бастау"
+  },
+  "ProfilePage": {
+    "signOut": "Шығу",
+    "closeButtonAlt": "Жабу",
+    "shortInfoTitle": "Сіз туралы қысқаша ақпарат",
+    "shortInfoDescription": "Қысқаша сауалнаманы толтырыңыз",
+    "fullName": "Аты-жөні",
+    "fullNamePlaceholder": "Аты-жөніңізді енгізіңіз",
+    "grade": "Сынып",
+    "gradePlaceholder": "Сыныпыңызды енгізіңіз",
+    "age": "Жас",
+    "agePlaceholder": "Жасыңызды енгізіңіз",
+    "phoneNumber": "Телефон нөмірі",
+    "phoneNumberPlaceholder": "Нөмірді енгізіңіз",
+    "continue": "Жалғастыру"
+  },
+  "QuizPage": {
+    "arrowBack": "Артқа",
+    "closeButton": "Жабу",
+    "quizTitle": "AI Профориентатор",
+    "questionCounter": "сұрақ",
+    "errorMessage": "Қате"
+  }
+}

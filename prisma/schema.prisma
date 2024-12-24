@@ -1,0 +1,180 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")  // Use the environment variable for existing DB
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum AuthRole {
+  USER
+  ADMIN
+}
+
+model User {
+  id            String          @id @default(cuid())
+  name          String?
+  grade         String?  
+  age           String?
+  phoneNumber   String?  
+  email         String          @unique
+  emailVerified DateTime?
+  image         String?
+  role          AuthRole @default(USER)
+  accounts      Account[]
+  sessions      Session[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt  
+
+
+  UserQuizzes UserQuiz[]
+
+  Results Results[]
+
+  UserChats UserChats[]
+}
+ 
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+ 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  @@id([provider, providerAccountId])
+}
+ 
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+ 
+  @@id([identifier, token])
+}
+ 
+model UserQuiz {
+  user_quizzes_id String   @id @default(cuid())
+  user_id         String
+  quiz_id         String   @default("1")
+  started         DateTime
+  finished        DateTime?
+  isActive        Boolean  @default(true)
+  current_question Int     @default(1)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now()) @updatedAt
+  
+  user            User        @relation(fields: [user_id], references: [id])
+  userQuestions   UserQuestion[]
+  UserAnswer      UserAnswer[]
+}
+
+model UserQuestion {
+  user_questions_id String   @id @default(cuid())
+  question_id       String
+  user_quizzes_id   String
+  question_answered Boolean  @default(false)
+  question_text_kz  String
+  question_text_ru  String
+  question_type     String
+  riasec_code       String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @default(now()) @updatedAt
+
+  userQuiz          UserQuiz   @relation(fields: [user_quizzes_id], references: [user_quizzes_id])
+}
+
+model UserAnswer {
+  user_answers_id String   @id @default(cuid())
+  answer_id       String
+  question_id     String
+  user_quizzes_id String
+  answer_text_kz  String
+  answer_text_ru  String
+  isPicked        Boolean  @default(false)
+  riasec_score    Int
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now()) @updatedAt
+  
+  userQuiz        UserQuiz   @relation(fields: [user_quizzes_id], references: [user_quizzes_id])
+}
+
+model Results {
+  result_id String   @id @default(cuid())
+  user_id   String
+  quiz_id   String
+  R         Int
+  I         Int
+  A         Int
+  S         Int
+  E         Int
+  C         Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  
+  user      User     @relation(fields: [user_id], references: [id])
+  UserProfessions UserProfessions[]
+}
+
+model UserProfessions {
+  user_professions_id String   @id @default(cuid())
+  result_id           String
+  name                String
+  percent             Int
+  occupation_id       String
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @default(now()) @updatedAt
+  
+  result              Results  @relation(fields: [result_id], references: [result_id])
+}
+
+model UserChats {
+  chat_id        String   @id @default(cuid())
+  user_id        String
+  profession_id  String
+  chat_title     String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now()) @updatedAt
+
+  user           User     @relation(fields: [user_id], references: [id])
+  ChatMessages   ChatMessages[]
+}
+
+model ChatMessages {
+  message_id     String   @id @default(cuid())
+  chat_id        String
+  role           String
+  text           String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now()) @updatedAt
+
+  chat           UserChats @relation(fields: [chat_id], references: [chat_id])
+}

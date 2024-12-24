@@ -1,0 +1,32 @@
+{
+  "HomePage": {
+    "logoAlt": "Главный логотип",
+    "mainImageAlt": "Основное изображение",
+    "findYourCalling": "Найди своё призвание",
+    "interactiveHelperDescription": "Интерактивный помощник для определения талантов и выбора подходящей профессии",
+    "cursorMagicAlt": "Иконка волшебного курсора",
+    "startTest": "Начать тест"
+  },
+  "ProfilePage": {
+    "signOut": "Выйти",
+    "closeButtonAlt": "Закрыть",
+    "shortInfoTitle": "Краткая информация о вас",
+    "shortInfoDescription": "Пожалуйста, заполните короткую анкету",
+    "fullName": "ФИО",
+    "fullNamePlaceholder": "Введите ФИО",
+    "grade": "Класс",
+    "gradePlaceholder": "Введите ваш класс",
+    "age": "Возраст",
+    "agePlaceholder": "Введите ваш возраст",
+    "phoneNumber": "Номер телефона",
+    "phoneNumberPlaceholder": "Введите номер",
+    "continue": "Продолжить"
+  },
+  "QuizPage": {
+    "arrowBack": "Назад",
+    "closeButton": "Закрыть",
+    "quizTitle": "AI Профориентатор",
+    "questionCounter": "вопросов",
+    "errorMessage": "Ошибка"
+  }
+}
